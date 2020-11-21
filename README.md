@@ -57,6 +57,10 @@ Implementations from third parties:
 <br />
 <a href="https://github.com/ridicoulous/Bitmex.Net">Bitmex</a>
 </td>
+<td><a href="https://github.com/intelligences/HitBTC.Net"><img src="https://github.com/intelligences/HitBTC.Net/blob/master/src/HitBTC.Net/Icon/icon.png?raw=true"></a>
+<br />
+<a href="https://github.com/intelligences/HitBTC.Net">HitBTC</a>
+</td>
 </tr>
 </table>
 
@@ -145,6 +149,24 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.3.6 - 19 nov 2020
+    * Fixed reference in package
+
+* Version 6.3.5 - 19 nov 2020
+    * Added PendingTrade status to futures symbol status mapping
+    * Added BNB burn toggle endpoints
+    * Added Composite index endpoint to USDT futures
+    * Added Composite index stream to USDT futures
+    * Added archived parameter for margin loan/repay/interestHistory queries
+
+* Version 6.3.4 - 16 nov 2020
+    * Added missig TimeInForce mapping
+    * Added missing orderResponseType parameter to futures PlaceOrder
+
+* Version 6.3.3 - 09 nov 2020
+    * Updated check for valid Binance symbol
+    * Fixed ModifyPositionMode result symbol
+
 * Version 6.3.2 - 23 okt 2020
     * Re-added locking when signing messages to prevent issues when multithreading
 

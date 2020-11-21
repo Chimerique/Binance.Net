@@ -926,7 +926,7 @@
         </member>
         <member name="F:Binance.Net.Enums.OrderResponseType.Full">
             <summary>
-            Full order info
+            Full order info, only valid on SPOT orders  
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.OrderSide">
@@ -1409,6 +1409,11 @@
             Not trading yet
             </summary>
         </member>
+        <member name="F:Binance.Net.Enums.SymbolStatus.PendingTrading">
+            <summary>
+            Pending trading
+            </summary>
+        </member>
         <member name="F:Binance.Net.Enums.SymbolStatus.Trading">
             <summary>
             Trading
@@ -1482,6 +1487,11 @@
         <member name="F:Binance.Net.Enums.TimeInForce.GoodTillCrossing">
             <summary>
             GoodTillCrossing orders will post only
+            </summary>
+        </member>
+        <member name="F:Binance.Net.Enums.TimeInForce.GoodTillExpiredOrCanceled">
+            <summary>
+            Good til the order expires or is canceled
             </summary>
         </member>
         <member name="T:Binance.Net.Enums.TradeRulesBehaviour">
@@ -3055,6 +3065,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFuturesUsdt.SubscribeToCompositeIndexUpdates(System.String,System.Action{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex})">
+            <summary>
+            Subscribes to composite index updates stream for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientFuturesUsdt.SubscribeToCompositeIndexUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex})">
+            <summary>
+            Subscribes to composite index updates stream for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="T:Binance.Net.Interfaces.SocketSubClient.IBinanceSocketClientSpot">
             <summary>
             Spot subscription interface
@@ -3852,7 +3878,7 @@
             Futures orders interface
             </summary>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -3870,11 +3896,12 @@
             <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+            <param name="orderResponseType">The response type. Default Acknowledge</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesOrders.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -3892,6 +3919,7 @@
             <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+            <param name="orderResponseType">The response type. Default Acknowledge</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -4334,6 +4362,22 @@
             <param name="endTime">End time to get taker buy/sell volume ratio</param>
             <param name="ct">Cancellation token</param>
             <returns>Taker Buy/Sell Volume Ratio info</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetCompositeIndexInfo(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets composite index info
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtMarket.GetCompositeIndexInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets composite index info
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.Futures.IBinanceClientFuturesUsdtOrder">
             <summary>
@@ -5004,6 +5048,42 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dust transfer result</returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetBnbBurnStatus(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.GetBnbBurnStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.SetBnbBurnStatus(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Sets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+            <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.Interfaces.SubClients.IBinanceClientGeneral.SetBnbBurnStatusAsync(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Sets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+            <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.Interfaces.SubClients.IBinanceClientLending">
             <summary>
@@ -6606,7 +6686,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get loan records
             </summary>
@@ -6616,12 +6696,13 @@
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query loan records
             </summary>
@@ -6630,13 +6711,14 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -6645,13 +6727,14 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Number of page records</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -6660,13 +6743,14 @@
             <param name="startTime">Time to start getting records from</param>
             <param name="endTime">Time to stop getting records to</param>
             <param name="current">Filter by number</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -6675,12 +6759,13 @@
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
-        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.Interfaces.SubClients.Margin.IBinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -6689,6 +6774,7 @@
             <param name="startTime">Filter by startTime from</param>
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="limit">Limit of the amount of results</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
@@ -7986,6 +8072,21 @@
             The amount of calls the limit is
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BinanceResult">
+            <summary>
+            Query result
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResult.Code">
+            <summary>
+            Result code
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.BinanceResult.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.BinanceResult`1">
             <summary>
             Query result
@@ -7995,11 +8096,6 @@
         <member name="P:Binance.Net.Objects.BinanceResult`1.Data">
             <summary>
             The data
-            </summary>
-        </member>
-        <member name="P:Binance.Net.Objects.BinanceResult`1.Code">
-            <summary>
-            Result code
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.BinanceStreamEvent">
@@ -9284,6 +9380,11 @@
             Share
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.BSwap.BinancePoolShare">
+            <summary>
+            Pool share info
+            </summary>
+        </member>
         <member name="P:Binance.Net.Objects.BSwap.BinancePoolShare.ShareAmount">
             <summary>
             Share amount
@@ -9743,6 +9844,11 @@
         <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.MaxNotional">
             <summary>
             Maximum available notional with current leverage
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesAccountPosition.PositionAmount">
+            <summary>
+            Position amount
             </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.FuturesData.BinanceFuturesBasis">
@@ -10766,6 +10872,46 @@
             Timestamp
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo">
+            <summary>
+            Index info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.Timestamp">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfo.BaseAssets">
+            <summary>
+            Base asset list
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset">
+            <summary>
+            Composite index asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.BaseAsset">
+            <summary>
+            Base asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.WeightInQuantity">
+            <summary>
+            Weight in quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesCompositeIndexInfoAsset.WeightInPercentage">
+            <summary>
+            Weight in percentage
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Futures.MarketData.BinanceFuturesExchangeInfo">
             <summary>
             Exchange info
@@ -11039,6 +11185,11 @@
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.BaseAsset">
             <summary>
             The base asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.MarginAsset">
+            <summary>
+            Margin asset
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Futures.MarketData.BinanceFuturesSymbol.QuoteAsset">
@@ -11375,6 +11526,46 @@
             Casts this object to a <see cref="T:Binance.Net.Objects.Spot.MarketData.BinanceSpotKline"/> object
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex">
+            <summary>
+            Composite index info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex.Symbol">
+            <summary>
+            The symbol
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex.Price">
+            <summary>
+            The price
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex.Composition">
+            <summary>
+            Composition
+            </summary>
+        </member>
+        <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset">
+            <summary>
+            Composite index asset info
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.Asset">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.WeightInQuantity">
+            <summary>
+            Weight in quantity
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndexAsset.WeightInPercentage">
+            <summary>
+            Weight in percentage
+            </summary>
         </member>
         <member name="T:Binance.Net.Objects.Futures.MarketStream.BinanceStreamIndexKlineData">
             <summary>
@@ -15282,6 +15473,21 @@
             The total balance of this asset (Free + Locked)
             </summary>
         </member>
+        <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceBnbBurnStatus">
+            <summary>
+            Bnb burn status
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceBnbBurnStatus.SpotBnbBurn">
+            <summary>
+            If spot trading BNB burn is enabled
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SpotData.BinanceBnbBurnStatus.InterestBnbBurn">
+            <summary>
+            If margin interest BNB burn is enabled
+            </summary>
+        </member>
         <member name="T:Binance.Net.Objects.Spot.SpotData.BinanceCanceledOrder">
             <summary>
             Information about a canceled order
@@ -16615,6 +16821,11 @@
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Asset">
             <summary>
             Asset
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.TransactionId">
+            <summary>
+            Transaction id
             </summary>
         </member>
         <member name="P:Binance.Net.Objects.Spot.SubAccountData.BinanceSubAccountTransferSubAccount.Quantity">
@@ -18495,6 +18706,22 @@
             <param name="onMessage">The event handler for the received data</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToCompositeIndexUpdates(System.String,System.Action{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex})">
+            <summary>
+            Subscribes to composite index updates stream for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToCompositeIndexUpdatesAsync(System.String,System.Action{Binance.Net.Objects.Futures.MarketStream.BinanceFuturesStreamCompositeIndex})">
+            <summary>
+            Subscribes to composite index updates stream for a symbol
+            </summary>
+            <param name="symbol">The symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
         <member name="M:Binance.Net.SocketSubClients.BinanceSocketClientFuturesUsdt.SubscribeToAllSymbolTickerUpdates(System.Action{System.Collections.Generic.IEnumerable{Binance.Net.Interfaces.IBinanceTick}})">
             <summary>
             Subscribes to ticker updates stream for all symbols
@@ -19490,6 +19717,42 @@
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Dust transfer result</returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetBnbBurnStatus(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.GetBnbBurnStatusAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Gets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.SetBnbBurnStatus(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Sets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+            <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.BinanceClientGeneral.SetBnbBurnStatusAsync(System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <summary>
+            Sets the status of the BNB burn switch for spot trading and margin interest
+            </summary>
+            <param name="spotTrading">If BNB burning should be enabled for spot trading</param>
+            <param name="marginInterest">If BNB burning should be enabled for margin interest</param>
+            <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
         </member>
         <member name="T:Binance.Net.SubClients.BinanceClientLending">
             <summary>
@@ -21166,7 +21429,7 @@
             Futures client
             </summary>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceOrder(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -21184,11 +21447,12 @@
             <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
+            <param name="orderResponseType">The response type. Default Acknowledge</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Futures.BinanceClientFuturesOrder.PlaceOrderAsync(System.String,Binance.Net.Enums.OrderSide,Binance.Net.Enums.OrderType,System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.PositionSide},System.Nullable{Binance.Net.Enums.TimeInForce},System.Nullable{System.Boolean},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{Binance.Net.Enums.WorkingType},System.Nullable{System.Boolean},System.Nullable{Binance.Net.Enums.OrderResponseType},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Places a new order
             </summary>
@@ -21206,6 +21470,7 @@
             <param name="callbackRate">Used with TRAILING_STOP_MARKET orders</param>
             <param name="workingType">stopPrice triggered by: "MARK_PRICE", "CONTRACT_PRICE"</param>
             <param name="closePosition">Close-All，used with STOP_MARKET or TAKE_PROFIT_MARKET.</param>
+            <param name="orderResponseType">The response type. Default Acknowledge</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Id's for the placed order</returns>
@@ -22308,6 +22573,22 @@
             <param name="ct">Cancellation token</param>
             <returns>Taker Buy/Sell Volume Ratio info</returns>
         </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetCompositeIndexInfo(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets composite index info
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtMarket.GetCompositeIndexInfoAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Gets composite index info
+            </summary>
+            <param name="symbol">The symbol to get the data for</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="T:Binance.Net.SubClients.Futures.Usdt.BinanceClientFuturesUsdtOrder">
             <summary>
             USDT-M futures order endpoints
@@ -22485,7 +22766,7 @@
             <param name="ct">Cancellation token</param>
             <returns>List of transfers</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoans(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get loan records
             </summary>
@@ -22496,11 +22777,12 @@
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetLoansAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query loan records
             </summary>
@@ -22511,11 +22793,12 @@
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Loan records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepays(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -22526,11 +22809,12 @@
             <param name="current">Number of page records</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetRepaysAsync(System.String,System.Nullable{System.Int64},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Query repay records
             </summary>
@@ -22541,11 +22825,12 @@
             <param name="current">Filter by number</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="size">The records count size need show</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>Repay records</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistory(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -22555,11 +22840,12 @@
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
         </member>
-        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Int64},System.Threading.CancellationToken)">
+        <member name="M:Binance.Net.SubClients.Margin.BinanceClientMargin.GetInterestHistoryAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{System.Boolean},System.Nullable{System.Int64},System.Threading.CancellationToken)">
             <summary>
             Get history of interest
             </summary>
@@ -22569,6 +22855,7 @@
             <param name="endTime">Filter by endTime from</param>
             <param name="isolatedSymbol">Filter by isolated symbol</param>
             <param name="limit">Limit of the amount of results</param>
+            <param name="archived">Set to true for archived data from 6 months ago</param>
             <param name="receiveWindow">The receive window for which this request is active. When the request takes longer than this to complete the server will reject the request</param>
             <param name="ct">Cancellation token</param>
             <returns>List of interest events</returns>
